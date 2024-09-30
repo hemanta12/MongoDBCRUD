@@ -1,6 +1,6 @@
 # MongoDB CRUD Application with Spring Boot
 
-This project is a simple CRUD (Create, Read, Update, Delete) application using **Spring Boot** and **MongoDB**. It demonstrates how to perform basic database operations like inserting, updating, retrieving, and deleting data using Spring Boot and MongoDB.
+This project is a simple CRUD (Create, Read, Update, Delete) application using **Spring Boot** and **MongoDB**. It demonstrates how to perform basic database operations like inserting, updating, retrieving, and deleting data using Spring Boot and MongoDB. It also uses normal and complex indexing for optimization.
 
 ## Features
 
@@ -9,6 +9,9 @@ This project is a simple CRUD (Create, Read, Update, Delete) application using *
 - Retrieve a device by ID (GET)
 - Update a device by ID (PUT)
 - Delete a device by ID (DELETE)
+- **Database optimization** with normal and compound indexing:
+  - Normal indexes on `name` and `price` fields
+  - Compound index on `category` and `brand` fields for efficient querying
 
 ## Technology Stack
 
@@ -125,11 +128,35 @@ Project Structure
  │   │   ├── /controllers
  │   │   ├── /models
  │   │   ├── /repositories
+ |   |   |__ /services 
  │   │   └── Application.java
  │   └── /resources
  │       └── application.properties
  └── /test
      └── /java/com/example/mongodbcrud
 ```
+
+## Database Optimization with Indexing
+
+This project now includes **database optimizations** using **MongoDB indexes** to enhance query performance.
+
+### Indexes Added:
+1. **Normal Indexes**:
+   - `name`: Indexed to optimize queries that search by product name.
+   - `price`: Indexed to optimize queries that filter products by price.
+
+2. **Compound Index**:
+   - `category` and `brand`: Compound index to optimize queries that filter products by both category and brand simultaneously.
+
+### How Indexes Are Created:
+The indexes are automatically created when the application starts. The `IndexService` is responsible for managing the index creation.
+
+- **Normal Indexes**: Created on the `name` and `price` fields.
+- **Compound Index**: Created on the `category` and `brand` fields.
+
+### How to Test:
+You can test the indexing improvements by querying the `Product` collection via the API endpoints or by using MongoDB's `explain()` function to verify index usage.
+
+
 - **License**
 This project is licensed under the MIT License - see the LICENSE file for details.
