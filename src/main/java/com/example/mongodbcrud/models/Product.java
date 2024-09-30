@@ -1,6 +1,7 @@
 package com.example.mongodbcrud.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "products")
@@ -8,15 +9,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Product {
     @Id
      private String id;
-     private String name;
+    @Indexed
+    private String name;
+    @Indexed
      private Double price;
     private String category;
 
-    public Product(String id, String name, Double price, String category) {
+
+
+    private String brand;
+
+    public Product(String id, String name, Double price, String category, String brand) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
+        this.brand = brand;
     }
 
     public String getId() {
@@ -49,6 +57,14 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
 
